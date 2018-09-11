@@ -1,6 +1,2 @@
 requests
-random
-re
 beautifulsoup4
-shelve
-getpass
