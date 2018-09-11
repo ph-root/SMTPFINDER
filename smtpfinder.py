@@ -1,3 +1,4 @@
+#! python3
 import requests , os , bs4 , re , random , shelve , getpass , webbrowser , sys
 
 if sys.platform in ["linux","linux2"]:
@@ -9,10 +10,21 @@ else:
 	G = ''
 	R = ''
 
+
+retries = shelve.open('logging')
+if  retries['max_num'] - retries['num'] == 4:
+	try:
+		import update
+	except:
+		print(G + '[*] please check your connection to the internet')
+		print('[*] GoodBye ... ')
+		exit()
+retries.close()
+
 print(R + '''+++++++++++++++++++++++++++++++++++++++++++++++++
-+                 SMTP FINDER                   +
-+                CODER : BEN_TH                 +
-+           WHATSAPP : +201006698345            +
++                SMTP FINDER                    +
++              CODER : BEN_TH                   +
++          WHATSAPP : +201006698345             +
 + please Dont use this script in spam (illegal) +
 +    FB : www.facebook.com/bassem.beso.18659    +
 +++++++++++++++++++++++++++++++++++++++++++++++++''')
@@ -35,7 +47,8 @@ def chk():
 		# print('pass : ' , end = '')
 		pass1 = getpass.getpass('Password:')
 		if pass1 == log['users'][user1]:
-			print(G + '[*] You are logged in as %s'% (user1))
+			print(G + '[*] You are logged in as %s and you  have %s retries'% (user1,log['max_num'] - log['num']))
+
 		elif pass1 != log['users'][user1]:
 			print('the password is wrong !')
 			exit()
@@ -84,7 +97,7 @@ for i in range(5):
 
 	parse2 = bs4.BeautifulSoup(res.text , 'lxml')
 
-	elems2 = parse2.select('span[dir="ltr"]')
+	elems2 = parse2.select('.r a')
 
 
 
@@ -93,9 +106,9 @@ for i in range(5):
 	lenth = len(elems2)
 
 	for i in range(0, lenth):
-		if '.env' in elems2[i].getText():
-
-			urls.append(elems2[i].getText())
+		start = elems2[i].get('href').find('=') + 1
+		end = elems2[i].get('href').find('&s')
+		urls.append(elems2[i].get('href')[start:end])
 
 
 print('[*] you will get only ' , len(urls) , 'SMTP if you want upgrade your user contact me')
