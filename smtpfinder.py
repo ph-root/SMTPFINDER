@@ -11,15 +11,15 @@ else:
 	R = ''
 
 
-retries = shelve.open('logging')
-if  retries['max_num'] - retries['num'] == 4:
+#retries = shelve.open('logging')
+#if  retries['max_num'] - retries['num'] == 4:
 	try:
 		import update
 	except:
 		print(G + '[*] please check your connection to the internet')
 		print('[*] GoodBye ... ')
 		exit()
-retries.close()
+#retries.close()
 
 print(R + '''+++++++++++++++++++++++++++++++++++++++++++++++++
 +                SMTP FINDER                    +
