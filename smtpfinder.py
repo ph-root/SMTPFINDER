@@ -5,12 +5,12 @@ if sys.platform in ["linux","linux2"]:
 	W = '\033[0m'
 	G = '\033[32;1m'
 	R = '\033[31;1m'
-	xm = 'lxml'
+	
 else:
 	W = ''
 	G = ''
 	R = ''
-	xm = ''
+	
 
 
 retries = shelve.open('logging')
@@ -86,7 +86,10 @@ for i in range(5):
 # for shunk in res.iter_content(100000):
 # 	x.write(shunk)
 # x.close()
-	parse = bs4.BeautifulSoup(res.text , xm)
+	try:
+		parse = bs4.BeautifulSoup(res.text, "lxml")
+	except:
+		pass
 
 	elems = parse.select('#resultStats')
 
@@ -102,7 +105,11 @@ for i in range(5):
 		print(W + '[*] the number of results : ', end= '')
 		print(search.group())
 
-	parse2 = bs4.BeautifulSoup(res.text , 'lxml')
+	try:
+		parse2 = bs4.BeautifulSoup(res.text , "lxml")
+	except Exception as ex:
+		pass
+		
 
 	elems2 = parse2.select('.r a')
 
