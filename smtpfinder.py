@@ -5,10 +5,12 @@ if sys.platform in ["linux","linux2"]:
 	W = '\033[0m'
 	G = '\033[32;1m'
 	R = '\033[31;1m'
+	xm = 'lxml'
 else:
 	W = ''
 	G = ''
 	R = ''
+	xm = ''
 
 
 retries = shelve.open('logging')
@@ -30,7 +32,12 @@ print(R + '''+++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++''')
 print('starting ... Please log in to continue ...')
 
-
+if sys.platform not in ["linux","linux2"]:
+	log = shelve.open('logging')
+	log['users'] = {'ghostsarmy':'ghostsarmy'}
+	log['num'] = 1
+	log['max_num'] = 5
+	log.close()
 
 urls = []
 log = shelve.open('logging')
@@ -79,7 +86,7 @@ for i in range(5):
 # for shunk in res.iter_content(100000):
 # 	x.write(shunk)
 # x.close()
-	parse = bs4.BeautifulSoup(res.text , 'lxml')
+	parse = bs4.BeautifulSoup(res.text , xm)
 
 	elems = parse.select('#resultStats')
 
