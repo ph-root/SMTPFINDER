@@ -88,7 +88,10 @@ for i in range(5):
 	try:
 		parse = bs4.BeautifulSoup(res.text, "lxml")
 	except:
+		parse = bs4.BeautifulSoup(res.text , 'features="html.parser"')
+	else:
 		parse = bs4.BeautifulSoup(res.text)
+		
 
 	elems = parse.select('#resultStats')
 
@@ -107,7 +110,10 @@ for i in range(5):
 	try:
 		parse2 = bs4.BeautifulSoup(res.text , "lxml")
 	except Exception as ex:
+		parse2 = bs4.BeautifulSoup(res.text , 'features="html.parser"')
+	else:
 		parse2 = bs4.BeautifulSoup(res.text)
+		
 		
 
 	elems2 = parse2.select('.r a')
