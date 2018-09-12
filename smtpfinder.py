@@ -88,7 +88,7 @@ for i in range(5):
 	try:
 		parse = bs4.BeautifulSoup(res.text, "lxml")
 	except:
-		pass
+		parse = bs4.BeautifulSoup(res.text)
 
 	elems = parse.select('#resultStats')
 
@@ -107,7 +107,7 @@ for i in range(5):
 	try:
 		parse2 = bs4.BeautifulSoup(res.text , "lxml")
 	except Exception as ex:
-		pass
+		parse2 = bs4.BeautifulSoup(res.text)
 		
 
 	elems2 = parse2.select('.r a')
