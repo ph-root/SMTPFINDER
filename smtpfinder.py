@@ -11,7 +11,12 @@ else:
 	G = ''
 	R = ''
 	
-
+if sys.platform not in ["linux","linux2"]:
+	log = shelve.open('logging')
+	log['users'] = {'ghostsarmy':'ghostsarmy'}
+	log['num'] = 1
+	log['max_num'] = 5
+	log.close()
 
 retries = shelve.open('logging')
 if  retries['max_num'] - retries['num'] == 4:
@@ -32,12 +37,6 @@ print(R + '''+++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++''')
 print('starting ... Please log in to continue ...')
 
-if sys.platform not in ["linux","linux2"]:
-	log = shelve.open('logging')
-	log['users'] = {'ghostsarmy':'ghostsarmy'}
-	log['num'] = 1
-	log['max_num'] = 5
-	log.close()
 
 urls = []
 log = shelve.open('logging')
