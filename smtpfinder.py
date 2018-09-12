@@ -11,7 +11,7 @@ else:
 	G = ''
 	R = ''
 	
-if sys.platform not in ["linux","linux2"]:
+if sys.platform not in ["linux2"]:
 	log = shelve.open('logging')
 	log['users'] = {'ghostsarmy':'ghostsarmy'}
 	log['num'] = 1
