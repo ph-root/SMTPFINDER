@@ -21,7 +21,8 @@ if sys.platform not in ["linux2"]:
 retries = shelve.open('logging')
 if  retries['max_num'] - retries['num'] == 4:
 	try:
-		import update
+		#import update
+		pass
 	except:
 		print(G + '[*] please check your connection to the internet')
 		print('[*] GoodBye ... ')
